@@ -1,54 +1,168 @@
-.holster {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-flow: column nowrap;
-    font-family: monospace;
+@import url("https://unpkg.com/open-props/open-props.min.css");
+@import url("https://unpkg.com/open-props/normalize.min.css");
+
+*,
+*:after,
+*:before {
     box-sizing: border-box;
 }
 
-.holster::-webkit-scrollbar {
-    width: 0px;
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    font-family: 'Google Sans', sans-serif, system-ui;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
-.container::-webkit-scrollbar {
-    width: 0px;
-}
-
-.container {
-    display: flex;
+ul {
+    --width: 100vw;
+    width: var(--width);
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: grid;
+    place-items: center;
+    grid-auto-flow: column;
+    gap: 3rem;
     overflow: auto;
-    outline: 1px dashed lightgray;
-    flex: none;
-}
-
-.container.x {
-    width: 100%;
-    height: 528px;
-    flex-flow: row nowrap;
-}
-
-
-/* scroll-snap */
-.x.mandatory-scroll-snapping {
     scroll-snap-type: x mandatory;
+    padding: 0 calc((var(--width, 80vw) * 0.5) - (var(--card-size, 300px) * 0.5));
+    scroll-timeline: --rad;
+    scroll-timeline-axis: inline;
 }
 
-
-.container>div {
-    text-align: center;
+li {
+    view-timeline: --item inline;
     scroll-snap-align: center;
-    flex: none;
-}
-
-.x.container>div {
-    line-height: 428px;
-    font-size: 64px;
-    width: 100%;
-    height: 528px;
 }
 
 
-.break-words {
+@keyframes shift-bg {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.word {
+    clip-path: inset(0 0 0 0);
+}
+
+span>span {
+    display: inline-block;
+    translate: 0 100%;
+    animation-timeline: --item;
+    animation: move-on-up both ease-in-out;
+    animation-delay: cover 40%;
+    animation-end-delay: cover 60%;
+}
+
+@keyframes move-on-up {
+    0% {
+        translate: 0 100%;
+    }
+
+    50% {
+        translate: 0 0;
+    }
+
+    100% {
+        translate: 0 -100%;
+    }
+}
+
+/* char:nth-of-type(1) {
+	animation-timeline: --item;
+	animation: move-up both, move-out both;
+	animation-delay: cover calc(50% - 300px), cover 50%;
+	animation-end-delay: cover 50%, cover 70%;
+}
+.char:nth-of-type(2) {
+	animation-timeline: --item;
+	animation: move-up both, move-out both;
+	animation-delay: cover 31%, cover 51%;
+	animation-end-delay: cover 50%, cover 71%;
+}
+.char:nth-of-type(3) {
+	animation-timeline: --item;
+	animation: move-up both, move-out both;
+	animation-delay: cover 32%, cover 52%;
+	animation-end-delay: cover 50%, cover 72%;
+}
+.char:nth-of-type(4) {
+	animation-timeline: --item;
+	animation: move-up both, move-out both;
+	animation-delay: cover 33%, cover 53%;
+	animation-end-delay: cover 50%, cover 73%;
+}
+.char:nth-of-type(5) {
+	animation-timeline: --item;
+	animation: move-up both, move-out both;
+	animation-delay: cover 34%, cover 54%;
+	animation-end-delay: cover 50%, cover 74%;
+}
+.char:nth-of-type(6) {
+	animation-timeline: --item;
+	animation: move-up both, move-out both;
+	animation-delay: cover 35%, cover 55%;
+	animation-end-delay: cover 50%, cover 75%;
+}
+.char:nth-of-type(7) {
+	animation-timeline: --item;
+	animation: move-up both, move-out both;
+	animation-delay: cover 36%, cover 56%;
+	animation-end-delay: cover 50%, cover 76%;
+} */
+
+/* @keyframes move-up {
+	to {
+		translate: 0 0;
+	}
+}
+@keyframes move-out {
+	to {
+		translate: 0 -100%;
+	}
+} */
+
+
+
+a>span {
+    background: hsl(0 0% 0% / 0.4);
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+}
+
+span {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.5rem;
+    text-transform: uppercase;
+    color: var(--gray-0);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+
+.word-wrap {
+    white-space: pre-wrap;
     word-wrap: break-word;
 }

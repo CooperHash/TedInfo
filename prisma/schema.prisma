@@ -15,4 +15,5 @@ model Ted {
   tedshow   String    
   tedtitle  String
   tedinfo   String
+  tedcut    String
 }

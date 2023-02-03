@@ -7,12 +7,19 @@ import { VideoCameraIcon } from '@heroicons/react/24/solid'
 import { Slider } from '@/ui/Slider'
 import Link from 'next/link'
 import data from '../lib/TED.json'
-import { useEffect, useState } from 'react'
+import * as AspectRatio from '@radix-ui/react-aspect-ratio';
+import { CSSProperties, useEffect, useState } from 'react'
 interface Ted {
   id: number,
   tedshow: string,
   tedtitle: string,
-  tedinfo: string
+  tedinfo: string,
+  tedcut: string
+}
+const API_URL = '/api/allted'
+async function getMain(): Promise<Ted[]> {
+  const res = await fetch(API_URL)
+  return res.json()
 }
 
 
@@ -20,7 +27,15 @@ export default function Home() {
   let [list, setList] = useState<Ted[]>([])
 
   useEffect(() => {
-    setList(data.ted)
+    async function fetchData() {
+      const res = await getMain()
+      return res
+    }
+
+    fetchData().then((res) => {
+      console.log('res',res);
+      setList(res)
+    })
   }, [])
   return (
     <>
@@ -45,9 +60,26 @@ export default function Home() {
           <img src='/kyo1122-6.jpg' />
         </Link>
       </div> */}
-      <div className='flex justify-center items-center w-screen h-screen'>
-        <Slider data={list} />
-      </div>
+
+      <ul>
+        {list.map(item =>
+          <div className={"flex flex-row"} key={item.id}>
+            <div className={"w-[100px] wordwrap text-black text-xl font-medium mr-2"}>{item.tedtitle}</div>
+            <article key={item.id}>
+              <Link href={`/ted/${item.id}`}>
+                <div className='w-[300px]'>
+                  <AspectRatio.Root ratio={9 / 12}>
+                    <img
+                      className="Image object-cover w-full h-full rounded-xl"
+                      src={item.tedshow}
+                    />
+                  </AspectRatio.Root>
+                </div>
+              </Link>
+            </article>
+          </div>
+        )}
+      </ul>
     </>
   )
 }

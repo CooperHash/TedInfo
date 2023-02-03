@@ -4,6 +4,7 @@ CREATE TABLE "Ted" (
     "tedshow" TEXT NOT NULL,
     "tedtitle" TEXT NOT NULL,
     "tedinfo" TEXT NOT NULL,
+    "tedcut"  TEXT NOT NULL,
 
     CONSTRAINT "Ted_pkey" PRIMARY KEY ("id")
 );
