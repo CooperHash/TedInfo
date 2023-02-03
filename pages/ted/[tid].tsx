@@ -58,7 +58,7 @@ const Ted = () => {
                 </AspectRatio.Root>
               </div>
               <div className='w-1/3 inline-block break-words px-3 py-2 bg-gray-200 rounded-r-lg'>
-                <div className='text-red-500'>TIME</div>
+                <div className='text-red-500'>TED</div>
                 <div className='text-lg font-black text-black leading-6'>{ted.tedtitle}</div>
                 <div className='mt-2 line-clamp-6 text-sm'>{ted.tedinfo}</div>
               </div>
