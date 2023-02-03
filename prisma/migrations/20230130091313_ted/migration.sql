@@ -7,4 +7,4 @@ CREATE TABLE "Ted" (
     "tedcut"  TEXT NOT NULL,
 
     CONSTRAINT "Ted_pkey" PRIMARY KEY ("id")
-);
+)
