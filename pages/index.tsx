@@ -60,11 +60,13 @@ export default function Home() {
           <img src='/kyo1122-6.jpg' />
         </Link>
       </div> */}
-
       <ul>
         {list.map(item =>
           <div className={"flex flex-row"} key={item.id}>
-            <div className={"w-[100px] wordwrap text-black text-xl font-medium mr-2"}>{item.tedtitle}</div>
+            <div className={"w-[160px] wordwrap text-black text-xl leading-8 mr-2 flex flex-col"}>
+              <div className='font-bold'>{item.tedtitle.split(':')[0]}</div>
+              <div className=' font-semibold'>{item.tedtitle.split(':')[1]}</div>
+            </div>
             <article key={item.id}>
               <Link href={`/ted/${item.id}`}>
                 <div className='w-[300px]'>

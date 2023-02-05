@@ -63,7 +63,7 @@ const Ted = () => {
                 <div className='mt-2 line-clamp-6 text-sm'>{ted.tedinfo}</div>
               </div>
             </div>
-            <div className='mt-12 px-2 w-4/5 mx-auto whitespace-pre-line font-sans text-black text-lg leading-8 tracking-normal'>
+            <div className='mt-12 px-2 w-3/5 mx-auto whitespace-pre-line font-sans text-black text-xl leading-8 tracking-normal'>
               {ted.tedcut}
             </div>
           </div>
