@@ -29,7 +29,7 @@ ul {
     gap: 3rem;
     overflow: auto;
     scroll-snap-type: x mandatory;
-    padding: 0 calc((var(--width, 80vw) * 0.5) - (var(--card-size, 300px) * 0.5));
+    margin-left: 100px;
     scroll-timeline: --rad;
     scroll-timeline-axis: inline;
 }
