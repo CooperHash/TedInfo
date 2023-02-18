@@ -69,23 +69,23 @@ const Ted = () => {
       <div className='w-screen h-screen' id='capture'>
         {load ?
           (<div>
-            <div className='mt-2 flex flex-row w-4/5 mx-auto'>
-              <div className="w-2/3">
+            <div className='mt-2 flex flex-row phone:flex-col w-full p-4 mx-auto'>
+              <div className="w-full">
                 <AspectRatio.Root ratio={16 / 9}>
                   <img
-                    className="Image object-cover w-full h-full rounded-l-lg"
+                    className="Image object-cover w-full h-full ipad:rounded-l-lg pc:rounded-l-lg phone:rounded-t-lg"
                     src={ted.tedshow}
                     onLoad={onImageLoad}
                   />
                 </AspectRatio.Root>
               </div>
-              <div className='w-1/3 inline-block break-words px-3 py-2 bg-gray-200 rounded-r-lg'>
+              <div className='w-1/3 phone:w-full inline-block break-words px-3 py-2 bg-gray-200 rounded-r-lg phone:rounded-b-lg'>
                 <div className='text-red-500'>TED</div>
                 <div className='text-lg font-black text-black leading-6'>{ted.tedtitle}</div>
                 <div className='mt-2 line-clamp-6 text-sm text-black mt-[30px] leading-6'>{ted.tedinfo}</div>
               </div>
             </div>
-            <div className='mt-12 px-2 w-4/5 mx-auto whitespace-pre-line font-sans text-black text-xl leading-8 tracking-normal'>
+            <div className='mt-12 px-4 w-full mx-auto whitespace-pre-line font-sans text-black text-xl phone:text-lg leading-8 tracking-normal'>
               {ted.tedcut}
             </div>
           </div>
