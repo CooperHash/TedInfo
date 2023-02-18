@@ -1,16 +1,24 @@
 import Image from "next/image"
+import Link from "next/link"
 export default function Index() {
     return (
         <>
             <div className="index">
                 <div className="head w-screen h-screen">
-                    <div className="w-2/3 mx-auto text-black text-3xl font-extrabold mt-[140px]">Hundreds of magazines
-                        and leading newspapers.
-                        One subscription</div>
+                    <div className="mt-[240px] w-full">
+                        <div className="text-black font-extrabold text-4xl text-center phone:text-3xl">Hundreds of ted talks info</div>
+                        <div className="text-black font-extrabold text-4xl text-center phone:text-3xl">Fast get ideas</div>
+                        <div className="text-black font-extrabold text-4xl text-center phone:text-3xl">Let's Brain Bomming</div>
+                    </div>
+                    <Link href="/list">
+                        <div className="w-1/3 mt-[200px] mx-auto h-[44px] rounded-3xl bg-red-400 flex justify-center items-center">
+                            <div className="text-white text-sm">Try that</div>
+                        </div>
+                    </Link>
                 </div>
-                <section className="grid grid-cols-2">
-                    <div className="left sticky top-0 h-screen flex justify-center items-center">
-                        <Image alt="website" src="/website.png" width={500} height={500} />
+                <section className="grid grid-cols-2 phone:grid-cols-1">
+                    <div className="left pc:sticky ipad:sticky top-0 h-screen flex justify-center items-center">
+                        <Image alt="website" src="/website_14.png" width={400} height={500} />
                     </div>
                     <div className="right text-black">
                         <div className="h-screen bg-gray-100 flex justify-center items-center">
