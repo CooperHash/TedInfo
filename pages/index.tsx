@@ -1,87 +1,39 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import { Skeleton } from '@/ui/Skeleton'
-import { Navigation } from '@/ui/Navigation'
-import { VideoCameraIcon } from '@heroicons/react/24/solid'
-import { Slider } from '@/ui/Slider'
-import Link from 'next/link'
-import data from '../lib/TED.json'
-import * as AspectRatio from '@radix-ui/react-aspect-ratio';
-import { CSSProperties, useEffect, useState } from 'react'
-interface Ted {
-  id: number,
-  tedshow: string,
-  tedtitle: string,
-  tedinfo: string,
-  tedcut: string
-}
-const API_URL = '/api/allted'
-async function getMain(): Promise<Ted[]> {
-  const res = await fetch(API_URL)
-  return res.json()
-}
-
-
-export default function Home() {
-  let [list, setList] = useState<Ted[]>([])
-
-  useEffect(() => {
-    async function fetchData() {
-      const res = await getMain()
-      return res
-    }
-
-    fetchData().then((res) => {
-      console.log('res',res);
-      setList(res)
-    })
-  }, [])
-  return (
-    <>
-      {/* <Navigation /> */}
-      {/* <div className='grid grid-cols-3 grid-rows-2'>
-        <Link href='/photo/kyo1122-1'>
-          <img src='/kyo1122-1.jpg' />
-        </Link>
-        <Link href='/photo/kyo1122-2'>
-          <img src='/kyo1122-2.jpg' />
-        </Link>
-        <Link href='/photo/kyo1122-3'>
-          <img src='/kyo1122-3.jpg' />
-        </Link>
-        <Link href='/photo/kyo1122-4'>
-          <img src='/kyo1122-4.jpg' />
-        </Link>
-        <Link href='/photo/kyo1122-5'>
-          <img src='/kyo1122-5.jpg' />
-        </Link>
-        <Link href='/photo/kyo1122-6'>
-          <img src='/kyo1122-6.jpg' />
-        </Link>
-      </div> */}
-      <ul>
-        {list.map(item =>
-          <div className={"flex flex-row"} key={item.id}>
-            <div className={"w-[160px] wordwrap text-black text-xl leading-8 mr-2 flex flex-col"}>
-              <div className='font-bold'>{item.tedtitle.split(':')[0]}</div>
-              <div className=' font-semibold'>{item.tedtitle.split(':')[1]}</div>
-            </div>
-            <article key={item.id}>
-              <Link href={`/ted/${item.id}`}>
-                <div className='w-[300px]'>
-                  <AspectRatio.Root ratio={9 / 12}>
-                    <img
-                      className="Image object-cover w-full h-full rounded-xl"
-                      src={item.tedshow}
-                    />
-                  </AspectRatio.Root>
+import Image from "next/image"
+export default function Index() {
+    return (
+        <>
+            <div className="index">
+                <div className="head w-screen h-screen">
+                    <div className="w-2/3 mx-auto text-black text-3xl font-extrabold mt-[140px]">Hundreds of magazines
+                        and leading newspapers.
+                        One subscription</div>
                 </div>
-              </Link>
-            </article>
-          </div>
-        )}
-      </ul>
-    </>
-  )
+                <section className="grid grid-cols-2">
+                    <div className="left sticky top-0 h-screen flex justify-center items-center">
+                        <Image alt="website" src="/website.png" width={500} height={500} />
+                    </div>
+                    <div className="right text-black">
+                        <div className="h-screen bg-gray-100 flex justify-center items-center">
+                            <div className="w-3/5 mx-auto break-words">
+                                <div className="text-3xl font-extrabold">Celebrating Culture and Diversity</div>
+                                <div className="mt-3">Experience the richness and diversity of human culture with our platform's coverage of art, music, literature, and more. Our platform showcases the creativity and passion of artists, performers, and cultural icons around the world.</div>
+                            </div>
+                        </div>
+                        <div className="h-screen bg-gray-100 flex justify-center items-center">
+                            <div className="w-3/5 mx-auto break-words">
+                                <div className="text-3xl font-extrabold">Making Sense of the Markets</div>
+                                <div className="mt-3">Understand the latest developments and trends in business and finance, with our coverage of the stock market, global economies, and industry news. Get insights into the forces shaping the world of business and finance.</div>
+                            </div>
+                        </div>
+                        <div className="h-screen bg-gray-100 flex justify-center items-center">
+                            <div className="w-3/5 mx-auto break-words">
+                                <div className="text-3xl font-extrabold">Empowering Global Voices</div>
+                                <div className="mt-3">Discover diverse perspectives and the latest news from around the world with our platform. From politics to arts and entertainment, we bring you the stories and voices that matter.</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </>
+    )
 }

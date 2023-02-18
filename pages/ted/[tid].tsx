@@ -1,6 +1,9 @@
 import { useRouter } from 'next/router'
-import { ReactEventHandler, useEffect, useState } from 'react';
+import { ReactEventHandler, useEffect, useState, useRef } from 'react';
+import html2canvas from 'html2canvas';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
+import { log } from 'console';
+import { object } from 'zod';
 type Ted = {
   id: string,
   tedshow: string,
@@ -17,6 +20,8 @@ async function getTed(pid: string): Promise<Ted> {
 
 
 const Ted = () => {
+  // use html2canvas to download image
+  const [current, setCurrent] = useState<HTMLDivElement | null>(null);
   const [ted, setTed] = useState<Ted>({
     id: '',
     tedshow: '',
@@ -30,7 +35,9 @@ const Ted = () => {
   const onImageLoad: ReactEventHandler<HTMLImageElement> = (event) => {
     console.log(event);
   }
-  useEffect(() => {
+
+
+  useEffect(() => { 
     const pid = String(router.query.tid)
     async function fetch(pid: string) {
       const res = await getTed(pid)
@@ -40,11 +47,26 @@ const Ted = () => {
       console.log('res', res);
       setTed(res)
       setLoad(true)
+      setCurrent(document.querySelector('#capture') as HTMLDivElement);
     })
   }, [])
+
+  function dataURLtoBlob(dataURL: string): Blob | null {
+    const arr = dataURL.split(',');
+    const mime = arr[0].match(/:(.*?);/)![1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
+  }
+
+
   return (
     <>
-      <div className='w-screen h-screen'>
+      <div className='w-screen h-screen' id='capture'>
         {load ?
           (<div>
             <div className='mt-2 flex flex-row w-4/5 mx-auto'>
@@ -60,10 +82,10 @@ const Ted = () => {
               <div className='w-1/3 inline-block break-words px-3 py-2 bg-gray-200 rounded-r-lg'>
                 <div className='text-red-500'>TED</div>
                 <div className='text-lg font-black text-black leading-6'>{ted.tedtitle}</div>
-                <div className='mt-2 line-clamp-6 text-sm'>{ted.tedinfo}</div>
+                <div className='mt-2 line-clamp-6 text-sm text-black mt-[30px] leading-6'>{ted.tedinfo}</div>
               </div>
             </div>
-            <div className='mt-12 px-2 w-3/5 mx-auto whitespace-pre-line font-sans text-black text-xl leading-8 tracking-normal'>
+            <div className='mt-12 px-2 w-4/5 mx-auto whitespace-pre-line font-sans text-black text-xl leading-8 tracking-normal'>
               {ted.tedcut}
             </div>
           </div>
