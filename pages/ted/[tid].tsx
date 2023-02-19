@@ -69,8 +69,8 @@ const Ted = () => {
       <div className='w-screen h-screen' id='capture'>
         {load ?
           (<div>
-            <div className='mt-2 flex flex-row phone:flex-col w-full p-4 mx-auto'>
-              <div className="w-full">
+            <div className='mt-2 flex flex-row phone:flex-col phone:w-full phone:p-4 w-11/12 mx-auto'>
+              <div className="phone:w-full w-2/3">
                 <AspectRatio.Root ratio={16 / 9}>
                   <img
                     className="Image object-cover w-full h-full ipad:rounded-l-lg pc:rounded-l-lg phone:rounded-t-lg"
@@ -85,7 +85,7 @@ const Ted = () => {
                 <div className='mt-2 line-clamp-6 text-sm text-black mt-[30px] leading-6'>{ted.tedinfo}</div>
               </div>
             </div>
-            <div className='mt-12 px-4 w-full mx-auto whitespace-pre-line font-sans text-black text-xl phone:text-lg leading-8 tracking-normal'>
+            <div className='mt-12 px-4 w-11/12 phone:w-full phone:p-4 mx-auto whitespace-pre-line font-sans text-black text-xl phone:text-lg leading-8 tracking-normal'>
               {ted.tedcut}
             </div>
           </div>
