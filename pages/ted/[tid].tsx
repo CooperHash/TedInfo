@@ -1,9 +1,6 @@
 import { useRouter } from 'next/router'
-import { ReactEventHandler, useEffect, useState, useRef } from 'react';
-import html2canvas from 'html2canvas';
+import { ReactEventHandler, useEffect, useState } from 'react';
 import * as AspectRatio from '@radix-ui/react-aspect-ratio';
-import { log } from 'console';
-import { object } from 'zod';
 type Ted = {
   id: string,
   tedshow: string,
