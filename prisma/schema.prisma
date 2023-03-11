@@ -13,4 +13,5 @@ model Ted {
   tedtitle String
   tedinfo  String
   tedcut   String
+  tedrel   String?
 }

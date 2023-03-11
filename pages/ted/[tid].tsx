@@ -37,7 +37,7 @@ const Ted = () => {
   }
 
 
-  useEffect(() => { 
+  useEffect(() => {
     const pid = String(router.query.tid)
     async function fetch(pid: string) {
       const res = await getTed(pid)
