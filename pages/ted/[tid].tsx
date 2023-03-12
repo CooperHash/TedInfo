@@ -98,7 +98,7 @@ const Ted = () => {
                 <div key={index} className="flex flex-row">
                   <div className='w-4/5'>
                     <div className='text-black text-lg'>{rel.snip}</div>
-                    <div className='text-blue-400 font-blod text-italic text-sm'>{rel.book}</div>
+                    <div className='text-blue-300 font-blod text-italic text-sm'>{rel.book}</div>
                   </div>
                   <div className='w-1/5'>
                     <AspectRatio.Root ratio={9 / 12}>
