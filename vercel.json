@@ -1,0 +1,8 @@
+{
+    "builds": [
+        {
+            "src": "npx prisma db push && next build",
+            "use": "@now/static-build"
+        }
+    ]
+}
