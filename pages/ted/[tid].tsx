@@ -6,7 +6,8 @@ type Ted = {
   tedshow: string,
   tedtitle: string,
   tedinfo: string,
-  tedcut: string
+  tedcut: string,
+  tedrel: string,
 }
 
 const API_URL = '/api/detail'
@@ -19,12 +20,13 @@ async function getTed(pid: string): Promise<Ted> {
 const Ted = () => {
   // use html2canvas to download image
   const [current, setCurrent] = useState<HTMLDivElement | null>(null);
-  const [ted, setTed] = useState<Ted>({
+  const [ted, setTed] = useState<any>({
     id: '',
     tedshow: '',
     tedtitle: '',
     tedinfo: '',
-    tedcut: ''
+    tedcut: '',
+    tedrel: Array<Object>,
   });
   const [load, setLoad] = useState(false)
 
@@ -41,7 +43,8 @@ const Ted = () => {
       return res
     }
     fetch(pid).then((res) => {
-      console.log('res', res);
+      console.log('res', JSON.parse(res.tedrel));
+      res.tedrel = JSON.parse(res.tedrel)
       setTed(res)
       setLoad(true)
       setCurrent(document.querySelector('#capture') as HTMLDivElement);
@@ -66,24 +69,45 @@ const Ted = () => {
       <div className='w-screen h-screen' id='capture'>
         {load ?
           (<div>
-            <div className='mt-2 flex flex-row phone:flex-col phone:w-full phone:p-4 w-11/12 mx-auto'>
-              <div className="phone:w-full w-2/3">
-                <AspectRatio.Root ratio={16 / 9}>
-                  <img
-                    className="Image object-cover w-full h-full ipad:rounded-l-lg pc:rounded-l-lg phone:rounded-t-lg"
-                    src={ted.tedshow}
-                    onLoad={onImageLoad}
-                  />
-                </AspectRatio.Root>
+            <div className='border-black border-[2px] rounded-lg box-content w-11/12 mx-auto p-4 mt-4'>
+              <div className='mt-2 flex flex-row phone:flex-col phone:w-full phone:p-4 w-full'>
+                <div className="phone:w-full w-2/3">
+                  <AspectRatio.Root ratio={16 / 9}>
+                    <img
+                      className="Image object-cover w-full h-full ipad:rounded-l-lg pc:rounded-l-lg phone:rounded-t-lg"
+                      src={ted.tedshow}
+                      onLoad={onImageLoad}
+                    />
+                  </AspectRatio.Root>
+                </div>
+                <div className='w-1/3 phone:w-full inline-block break-words px-3 py-2 bg-gray-200 rounded-r-lg phone:rounded-b-lg'>
+                  <div className='text-red-500'>TED</div>
+                  <div className='text-lg font-black text-black leading-6'>{ted.tedtitle}</div>
+                  <div className='mt-2 line-clamp-6 text-sm text-black mt-[30px] leading-6'>{ted.tedinfo}</div>
+                </div>
               </div>
-              <div className='w-1/3 phone:w-full inline-block break-words px-3 py-2 bg-gray-200 rounded-r-lg phone:rounded-b-lg'>
-                <div className='text-red-500'>TED</div>
-                <div className='text-lg font-black text-black leading-6'>{ted.tedtitle}</div>
-                <div className='mt-2 line-clamp-6 text-sm text-black mt-[30px] leading-6'>{ted.tedinfo}</div>
+              <div className='mt-12 px-4 w-11/12 phone:w-full phone:p-4 mx-auto whitespace-pre-line font-sans text-black text-xl phone:text-lg leading-8 tracking-normal'>
+                {ted.tedcut}
               </div>
+
             </div>
-            <div className='mt-12 px-4 w-11/12 phone:w-full phone:p-4 mx-auto whitespace-pre-line font-sans text-black text-xl phone:text-lg leading-8 tracking-normal'>
-              {ted.tedcut}
+            <div className='mt-12 px-4 w-11/12 phone:w-full phone:p-4 mx-auto'>
+              {ted.tedrel.map((rel: any, index: number) => (
+                <div key={index} className="flex flex-row">
+                  <div className='w-4/5'>
+                    <div className='text-black text-lg'>{rel.snip}</div>
+                    <div className='text-blue-400 font-blod text-italic text-sm'>{rel.book}</div>
+                  </div>
+                  <div className='w-1/5'>
+                    <AspectRatio.Root ratio={9 / 12}>
+                      <img
+                        className="Image object-cover w-full h-full rounded-xl"
+                        src={rel.image}
+                      />
+                    </AspectRatio.Root>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
           )
