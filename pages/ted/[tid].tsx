@@ -43,8 +43,10 @@ const Ted = () => {
       return res
     }
     fetch(pid).then((res) => {
-      console.log('res', JSON.parse(res.tedrel));
-      res.tedrel = JSON.parse(res.tedrel)
+      if (res.tedrel) {
+        console.log('res', JSON.parse(res.tedrel));
+        res.tedrel = JSON.parse(res.tedrel)
+      }
       setTed(res)
       setLoad(true)
       setCurrent(document.querySelector('#capture') as HTMLDivElement);
