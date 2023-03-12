@@ -95,10 +95,11 @@ const Ted = () => {
             </div>
             <div className='mt-12 px-4 w-11/12 phone:w-full phone:p-4 mx-auto'>
               {ted.tedrel.map((rel: any, index: number) => (
-                <div key={index} className="flex flex-row">
-                  <div className='w-4/5'>
-                    <div className='text-black text-lg'>{rel.snip}</div>
-                    <div className='text-blue-300 font-blod text-italic text-sm'>{rel.book}</div>
+                <div key={index} className="flex flex-row mt-[60px]">
+                  <div className='w-4/5 px-8'>
+                    <div className='text-black text-xl font-bold'>{rel.snipen}</div>
+                    <div className='text-black text-lg mt-[60px]'>{rel.snipzn}</div>
+                    <div className='text-blue-300 font-blod text-italic text-lg'>{rel.book}</div>
                   </div>
                   <div className='w-1/5'>
                     <AspectRatio.Root ratio={9 / 12}>
