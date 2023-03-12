@@ -94,7 +94,7 @@ const Ted = () => {
 
             </div>
             <div className='mt-12 px-4 w-11/12 phone:w-full phone:p-4 mx-auto'>
-              {/* {ted.tedrel.map((rel: any, index: number) => (
+              {ted.tedrel.map((rel: any, index: number) => (
                 <div key={index} className="flex flex-row">
                   <div className='w-4/5'>
                     <div className='text-black text-lg'>{rel.snip}</div>
@@ -109,7 +109,7 @@ const Ted = () => {
                     </AspectRatio.Root>
                   </div>
                 </div>
-              ))} */}
+              ))}
             </div>
           </div>
           )
